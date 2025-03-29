@@ -42,6 +42,7 @@ import mock
 
 if sys.platform.startswith("linux"):
     sys.path.append(".")
+    from pywinauto import timings
     from pywinauto.linux.atspi_objects import AtspiAccessible
     from pywinauto.linux.atspi_objects import _AtspiRect
     from pywinauto.linux.atspi_objects import RECT
@@ -69,7 +70,6 @@ def _test_app():
 
 if sys.platform.startswith("linux"):
     class AtspiPointTests(unittest.TestCase):
-
         """Unit tests for AtspiPoint class"""
 
         def test_indexation(self):
@@ -94,7 +94,6 @@ if sys.platform.startswith("linux"):
 
 
     class AtspiRectTests(unittest.TestCase):
-
         """Unit tests for AtspiRect class"""
 
         def test_RECT_hash(self):
@@ -129,7 +128,6 @@ if sys.platform.startswith("linux"):
 
 
     class AtspiElementInfoTests(unittest.TestCase):
-
         """Unit tests for the AtspiElementInfo class"""
 
         def get_app(self, name, pid=None):
@@ -146,7 +144,7 @@ if sys.platform.startswith("linux"):
             self.app = Application()
             self.app.start(_test_app())
             time.sleep(1)
-            self.app_info = self.get_app(app_name)
+            self.app_info = timings.wait_until_passes(5, 1, self.get_app, (Exception,), app_name)
             self.app2 = None
 
         def tearDown(self):
