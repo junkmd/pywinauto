@@ -143,8 +143,9 @@ if sys.platform.startswith("linux"):
             self.desktop_info = AtspiElementInfo()
             self.app = Application()
             self.app.start(_test_app())
-            time.sleep(1)
-            self.app_info = timings.wait_until_passes(5, 1, self.get_app, (Exception,), app_name)
+            time.sleep(5)
+            self.app_info = self.get_app(app_name)
+            # self.app_info = timings.wait_until_passes(5, 1, self.get_app, (Exception,), app_name)
             self.app2 = None
 
         def tearDown(self):
