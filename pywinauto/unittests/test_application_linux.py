@@ -31,7 +31,6 @@ sys.path.append(".")
 
 if sys.platform.startswith('linux'):
     class ApplicationTestCases(unittest.TestCase):
-
         """Unit tests for the application.Application class"""
 
         def setUp(self):
